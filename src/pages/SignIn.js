@@ -1,15 +1,60 @@
 // src/pages/SignIn.js
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const SignIn = () => {
+  const [formData, setFormData] = useState({
+    userName: '',
+    userPassword: ''
+  });
+
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:9090/authenticate', formData);
+      console.log('User authenticated successfully:', response.data);
+      setSuccessMessage('User authenticated successfully!');
+      setErrorMessage('');
+      // Handle successful authentication, e.g., store token, redirect to another page
+    } catch (error) {
+      console.error('There was an error authenticating the user!', error);
+      setErrorMessage('Invalid username or password!');
+      setSuccessMessage('');
+    }
+  };
+
   return (
     <Container>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Title>Sign In</Title>
-        <Input type="email" placeholder="Email" />
-        <Input type="password" placeholder="Password" />
-        <Button>Sign In</Button>
+        {successMessage && <SuccessMessage>{successMessage}</SuccessMessage>}
+        {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+        <Input
+          type="text"
+          name="userName"
+          placeholder="Username"
+          value={formData.userName}
+          onChange={handleChange}
+        />
+        <Input
+          type="password"
+          name="userPassword"
+          placeholder="Password"
+          value={formData.userPassword}
+          onChange={handleChange}
+        />
+        <Button type="submit">Sign In</Button>
       </Form>
     </Container>
   );
@@ -59,4 +104,16 @@ const Button = styled.button`
   &:hover {
     background: #555;
   }
+`;
+
+const SuccessMessage = styled.p`
+  color: green;
+  text-align: center;
+  margin-bottom: 20px;
+`;
+
+const ErrorMessage = styled.p`
+  color: red;
+  text-align: center;
+  margin-bottom: 20px;
 `;

@@ -1,17 +1,79 @@
 // src/pages/SignUp.js
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const SignUp = () => {
+  const [formData, setFormData] = useState({
+    userName: '',
+    userFirstName: '',
+    userLastName: '',
+    userPassword: ''
+  });
+
+  const [successMessage, setSuccessMessage] = useState('');
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:9090/registerNewUser', formData);
+      console.log('User registered successfully:', response.data);
+      // Reset form
+      setFormData({
+        userName: '',
+        userFirstName: '',
+        userLastName: '',
+        userPassword: ''
+      });
+      // Set success message
+      setSuccessMessage('User registered successfully!');
+    } catch (error) {
+      console.error('There was an error registering the user!', error);
+      // Handle registration error
+    }
+  };
+
   return (
     <Container>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Title>Sign Up</Title>
-        <Input type="text" placeholder="Name" />
-        <Input type="email" placeholder="Email" />
-        <Input type="password" placeholder="Password" />
-        <Input type="confirmpassword" placeholder="Confirm Password" />
-        <Button>Sign Up</Button>
+        {successMessage && <SuccessMessage>{successMessage}</SuccessMessage>}
+        <Input
+          type="text"
+          name="userName"
+          placeholder="Username"
+          value={formData.userName}
+          onChange={handleChange}
+        />
+        <Input
+          type="text"
+          name="userFirstName"
+          placeholder="First Name"
+          value={formData.userFirstName}
+          onChange={handleChange}
+        />
+        <Input
+          type="text"
+          name="userLastName"
+          placeholder="Last Name"
+          value={formData.userLastName}
+          onChange={handleChange}
+        />
+        <Input
+          type="password"
+          name="userPassword"
+          placeholder="Password"
+          value={formData.userPassword}
+          onChange={handleChange}
+        />
+        <Button type="submit">Sign Up</Button>
       </Form>
     </Container>
   );
@@ -61,4 +123,10 @@ const Button = styled.button`
   &:hover {
     background: #555;
   }
+`;
+
+const SuccessMessage = styled.p`
+  color: green;
+  text-align: center;
+  margin-bottom: 20px;
 `;
