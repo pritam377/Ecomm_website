@@ -15,6 +15,7 @@ import {
   TransitionChild,
 } from '@headlessui/react'
 import { Bars3Icon, MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import HomePage from '../../../pages/HomePage'
 
 const navigation = {
   categories: [
@@ -311,7 +312,7 @@ export default function Navigation() {
                   <span className="sr-only">Your Company</span>
                   <img
                     className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                    src=""
                     alt=""
                   />
                 </a>
@@ -463,6 +464,10 @@ export default function Navigation() {
           </div>
         </nav>
       </header>
+
+      <div>
+        <HomePage/>
+      </div>
     </div>
   )
 }
