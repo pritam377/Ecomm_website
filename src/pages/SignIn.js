@@ -1,7 +1,8 @@
-// src/pages/SignIn.js
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 
 const SignIn = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ const SignIn = () => {
 
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -26,7 +28,25 @@ const SignIn = () => {
       console.log('User authenticated successfully:', response.data);
       setSuccessMessage('User authenticated successfully!');
       setErrorMessage('');
-      // Handle successful authentication, e.g., store token, redirect to another page
+      const token = response.data.jwtToken;
+      console.log(token)
+      if (!token) {
+        throw new Error('Token not found in response');
+      }
+      // const decodedToken = jwtDecode(token);
+      const { role } = response.data.user.role[0].roleName;
+      localStorage.setItem('token', token);
+
+      setTimeout(() => {
+        if (role === 'admin') {
+          navigate('/admin-dashboard');
+        } else if (role === 'user') {
+          navigate('/admin-dashboard');
+        } else {
+          navigate('/');
+        }
+      }, 2000); 
+
     } catch (error) {
       console.error('There was an error authenticating the user!', error);
       setErrorMessage('Invalid username or password!');
@@ -55,6 +75,9 @@ const SignIn = () => {
           onChange={handleChange}
         />
         <Button type="submit">Sign In</Button>
+        <SignUpLink>
+          New user? <Link to="/signup">Sign up here</Link>
+        </SignUpLink>
       </Form>
     </Container>
   );
@@ -116,4 +139,20 @@ const ErrorMessage = styled.p`
   color: red;
   text-align: center;
   margin-bottom: 20px;
+`;
+
+
+const SignUpLink = styled.p`
+  text-align: center;
+  margin-top: 20px;
+
+  a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 `;

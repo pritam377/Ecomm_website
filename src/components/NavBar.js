@@ -1,13 +1,26 @@
-// src/components/Navbar.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { FaBars, FaTimes } from 'react-icons/fa';
+import { Link, useNavigate } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({ toggleSidebar }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    setIsAuthenticated(!!token);
+  }, []);
 
   const toggle = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setIsAuthenticated(false);
+    navigate('/signin');
   };
 
   return (
@@ -16,10 +29,24 @@ const Navbar = () => {
       <Hamburger onClick={toggle}>
         {isOpen ? <FaTimes /> : <FaBars />}
       </Hamburger>
-      <Menu isOpen={isOpen}>
-        <MenuLink href="/signin">Sign In</MenuLink>
-        <MenuLink href="/signup">Sign Up</MenuLink>
-      </Menu>
+      <SidebarToggle onClick={toggleSidebar} isOpen={isOpen}>
+        <FaBars />
+        <Menu isOpen={isOpen}>
+          {!isAuthenticated ? (
+            <>
+              <MenuLink href="/signin">Sign In</MenuLink>
+              <MenuLink href="/signup">Sign Up</MenuLink>
+            </>
+          ) : (
+            <>
+              <MenuLink href="/profile">Profile</MenuLink>
+              <MenuLink as="button" onClick={handleLogout}>
+                Logout
+              </MenuLink>
+            </>
+          )}
+        </Menu>
+      </SidebarToggle>
     </Nav>
   );
 };
@@ -56,36 +83,40 @@ const Hamburger = styled.div`
   }
 `;
 
-const Menu = styled.div`
+const SidebarToggle = styled.div`
   display: flex;
   align-items: center;
-  gap: 20px;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  left: 20px;
 
-  @media (max-width: 768px) {
-    flex-direction: column;
-    width: 100%;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    background: #333;
-    transition: max-height 0.3s ease-in;
-    max-height: ${({ isOpen }) => (isOpen ? '200px' : '0')};
-    overflow: hidden;
+  svg {
+    color: #fff;
+    font-size: 1.8rem;
+    margin-right: 10px;
   }
+
+  @media (min-width: 769px) {
+    display: none;
+  }
+`;
+
+const Menu = styled.div`
+  display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
+  flex-direction: column;
+  width: 200px;
+  background: #333;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  padding: 20px;
 `;
 
 const MenuLink = styled.a`
   color: #fff;
   text-decoration: none;
   font-size: 1.2rem;
-
-  &:hover {
-    color: #f0a500;
-  }
-
-  @media (max-width: 768px) {
-    padding: 10px 0;
-    width: 100%;
-    text-align: center;
-  }
+  margin-bottom: 10px;
 `;
+

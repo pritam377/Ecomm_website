@@ -1,7 +1,7 @@
-// src/pages/SignUp.js
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +12,7 @@ const SignUp = () => {
   });
 
   const [successMessage, setSuccessMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -25,6 +26,7 @@ const SignUp = () => {
     try {
       const response = await axios.post('http://localhost:9090/registerNewUser', formData);
       console.log('User registered successfully:', response.data);
+
       // Reset form
       setFormData({
         userName: '',
@@ -32,8 +34,12 @@ const SignUp = () => {
         userLastName: '',
         userPassword: ''
       });
+
       // Set success message
       setSuccessMessage('User registered successfully!');
+      setTimeout(() => {
+        navigate('/signin');
+      }, 2000); 
     } catch (error) {
       console.error('There was an error registering the user!', error);
       // Handle registration error
