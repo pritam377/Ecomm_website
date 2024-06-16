@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.top-navbar{
+    background-color: #4F45E4;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.top-navbar .brand-name{
+    color: #fff;
+}
+
+.top-navbar .nav-link {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .top-navbar .nav-link:hover{
+    padding: 8px 20px;
+    font-size: 15px;
+    color: black;
+  }
