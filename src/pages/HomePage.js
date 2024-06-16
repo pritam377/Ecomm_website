@@ -6,7 +6,7 @@ const HomePage = () => {
   return (
     <div>
         <MainCarousel/>
-        <div>
+        <div className='mt-20'>
             <HomeSectionCarousel/>
         </div>
     </div>

@@ -487,6 +487,7 @@ export default function Navigation() {
                       key={page.name}
                       href={page.href}
                       className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
+                      style={{textDecoration:'none'}}
                     >
                       {page.name}
                     </a>
@@ -579,17 +580,17 @@ export default function Navigation() {
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                  <a href="/signin" className="text-sm font-medium text-gray-700 hover:text-gray-800">
+                  <a href="/signin" className="text-sm font-medium text-gray-700 hover:text-gray-800" style={{textDecoration:'none'}}>
                     Sign in
                   </a>
                   <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
-                  <a href="/signup" className="text-sm font-medium text-gray-700 hover:text-gray-800">
+                  <a href="/signup" className="text-sm font-medium text-gray-700 hover:text-gray-800" style={{textDecoration:'none'}}>
                     Create account
                   </a>
                 </div>
 
                 <div className="hidden lg:ml-8 lg:flex">
-                  <a href="#" className="flex items-center text-gray-700 hover:text-gray-800">
+                  <a href="#" className="flex items-center text-gray-700 hover:text-gray-800" style={{textDecoration:'none'}}>
                     <img
                       src="https://tailwindui.com/img/flags/flag-india.svg"
                       alt=""

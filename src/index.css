@@ -23,3 +23,15 @@
     font-size: 15px;
     color: black;
   }
+
+  .carousel-container {
+    height: 750px; 
+    overflow: hidden; 
+}
+
+.carousel-image {
+    max-height: 100%;
+    width: auto; 
+    display: block; 
+    margin: auto;
+}

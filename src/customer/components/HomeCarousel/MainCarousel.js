@@ -4,9 +4,9 @@ import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
 
 const MainCarousel = () => {
-const items = MainCarouselData.map((item)=> <img className="cursor-pointer" src={item.image} alt=''/>)
+const items = MainCarouselData.map((item)=> <img className="carousel-image cursor-pointer" src={item.image} alt=''/>)
   return (
-    <div>
+    <div className='carousel-container'>
         <AliceCarousel
         items={items}
         disableButtonsControls
