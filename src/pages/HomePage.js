@@ -1,6 +1,7 @@
-import React from 'react'
-import MainCarousel from "../customer/components/HomeCarousel/MainCarousel"
-import HomeSectionCarousel from '../customer/components/HomeSectionCarousel/HomeSectionCarousel'
+import React from 'react';
+import MainCarousel from "../customer/components/HomeCarousel/MainCarousel";
+import HomeSectionCarousel from '../customer/components/HomeSectionCarousel/HomeSectionCarousel';
+// import { Product_Data } from "../customer/components/HomeSectionCarousel/Product_Data";
 
 const HomePage = () => {
   return (
