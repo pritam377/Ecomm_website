@@ -1,6 +1,6 @@
-import Image1 from "../../../asserts/retro-vhs-packaging-indoors.jpg";
-import Image2 from "../../../asserts/smartphone-with-headphones.jpg";
-import Image3 from "../../../asserts/top-view-earphones-music-concept.jpg"
+import Image1 from "../../../asserts/Property1.png";
+import Image2 from "../../../asserts/Property2.png";
+import Image3 from "../../../asserts/Property3.png"
 
 export const MainCarouselData = [
     {

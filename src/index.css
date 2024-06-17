@@ -24,7 +24,7 @@
     color: black;
   }
 
-  .carousel-container {
+  /* .carousel-container {
     height: 750px; 
     overflow: hidden; 
 }
@@ -34,16 +34,4 @@
     width: auto; 
     display: block; 
     margin: auto;
-}
-
-@media (max-width:356px){
-  .carousel-container{
-    height: 250px;
-  }
-}
-
-@media (max-width:820px){
-  .carousel-container{
-    height: 250px;
-  }
-}
+} */

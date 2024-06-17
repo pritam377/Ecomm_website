@@ -1,5 +1,5 @@
 import React from "react";
-import Product1 from "../../../asserts/product1.jpg"
+import Product1 from "../../../asserts/hamzer_61_key_electric_music_keyboard_piano_with_stand_3.png.png"
 
 const HomeSectionCard = () => {
   return (
