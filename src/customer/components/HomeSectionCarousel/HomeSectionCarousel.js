@@ -13,7 +13,7 @@ const HomeSectionCarousel = () => {
   };
   const items = [1, 1, 1, 1, 1].map((item) => <HomeSectionCard />);
   return (
-    <div className="px-4 lg:px-8">
+    <div className="px-2 lg:px-8">
       <div className="relative p-5 border">
         <AliceCarousel
           items={items}
@@ -44,7 +44,7 @@ const HomeSectionCarousel = () => {
             position: "absolute",
             top: "8rem",
             left: "0rem",
-            transform: "translateX(50%) rotate(-90deg)",
+            transform: "translateX(-50%) rotate(-90deg)",
             bgcolor:"white"
           }}
           aria-label="next"

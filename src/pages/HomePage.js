@@ -8,6 +8,8 @@ const HomePage = () => {
         <MainCarousel/>
         <div className='mt-20'>
             <HomeSectionCarousel/>
+            <HomeSectionCarousel/>
+            <HomeSectionCarousel/>
         </div>
     </div>
   )
