@@ -16,6 +16,7 @@ import {
 } from '@headlessui/react'
 import { Bars3Icon, MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import HomePage from '../../../pages/HomePage'
+import Footer from '../Footer/Footer'
 
 const navigation = {
   categories: [
@@ -629,6 +630,8 @@ export default function Navigation() {
       <div>
         <HomePage/>
       </div>
+
+      <Footer/>
     </div>
   )
 }

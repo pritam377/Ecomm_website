@@ -4,9 +4,8 @@ import HomeSectionCard from "../HomeSectionCard/HomeSectionCard";
 import "react-alice-carousel/lib/alice-carousel.css";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import Button from '@mui/material/Button';
-import { Product_Data } from "./Product_Data";
 
-const HomeSectionCarousel = () => {
+const HomeSectionCarousel = ({data,sectionName}) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const responsive = {
     0: { items: 1 },
@@ -14,7 +13,7 @@ const HomeSectionCarousel = () => {
     1024: { items: 5.5 },
   };
 
-  const items = Product_Data.slice(0, 10).map((item) => <HomeSectionCard product={item} />);
+  const items = data.slice(0, 10).map((item) => <HomeSectionCard product={item} />);
   const maxIndex = items.length - 5;
 
   const slidePrev = () => setActiveIndex(Math.max(activeIndex - 1, 0));
@@ -23,6 +22,7 @@ const HomeSectionCarousel = () => {
 
   return (
     <div className="border">
+    <h2 className="text-2xl font-extrabold text-gray-800 py-5">{sectionName}</h2>
       <div className="relative p-5">
         <AliceCarousel
           items={items}
