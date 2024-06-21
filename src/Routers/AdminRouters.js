@@ -1,16 +1,13 @@
 import React from 'react';
-import {Routes,Route} from "react-router-dom";
-import Admin from '../Admin/components/Admin';
-
+import { Routes, Route } from "react-router-dom";
+import Admin from '../Admin/Admin';
 
 const AdminRouters = () => {
   return (
-    <div>
-        <Routes>
-            <Route path='/' element={<Admin/>}/>
-        </Routes>
-    </div>
-  )
+    <Routes>
+      <Route path="/*" element={<Admin />} />
+    </Routes>
+  );
 }
 
-export default AdminRouters
+export default AdminRouters;
